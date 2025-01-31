@@ -5,37 +5,36 @@ import (
 	"testing"
 )
 
-
 func TestGetAPIKey(t *testing.T) {
 	tests := []struct {
-		name 	string
-		header 	http.Header
-		want	string
+		name    string
+		header  http.Header
+		want    string
 		wantErr bool
 	}{
 		{
-			name:		"valid header",
-			header:		http.Header{"Authorization": []string{"ApiKey testApiKey"}},
-			want:		"testApiKey",
-			wantErr: 	false,
+			name:    "valid header",
+			header:  http.Header{"Authorization": []string{"ApiKey testApiKey"}},
+			want:    "testApiKey",
+			wantErr: false,
 		},
 		{
-			name:		"missing token header",
-			header:		http.Header{"Authorization": []string{}},
-			want:		"",
-			wantErr: 	true,
+			name:    "missing token header",
+			header:  http.Header{"Authorization": []string{}},
+			want:    "",
+			wantErr: true,
 		},
 		{
-			name:		"Header contains more than one API Key",
-			header:		http.Header{"Authorization": []string{"ApiKey testApiKey anotherApiKey anotherAnotherAPIKey"}},
-			want:		"testApiKey",
-			wantErr: 	false,
+			name:    "Header contains more than one API Key",
+			header:  http.Header{"Authorization": []string{"ApiKey testApiKey anotherApiKey anotherAnotherAPIKey"}},
+			want:    "testApiKey",
+			wantErr: false,
 		},
 		{
-			name:		"Header contains multiple tokens",
-			header:		http.Header{"Authorization": []string{"Bearer testBearerToken", "ApiKey testApiKey"}},
-			want:		"",
-			wantErr: 	true,
+			name:    "Header contains multiple tokens",
+			header:  http.Header{"Authorization": []string{"Bearer testBearerToken", "ApiKey testApiKey"}},
+			want:    "",
+			wantErr: true,
 		},
 	}
 
